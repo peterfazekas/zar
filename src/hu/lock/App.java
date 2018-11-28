@@ -23,6 +23,8 @@ public class App {
 	private void run() {
 		String masterKey = data.consoleRead("2. feladat: Adja meg mi nyitja a zárat: ");
 		System.out.println("3. feladat: A nyitó kódszámok sorai: " + lock.getSameKeyIds(masterKey));
+		System.out.println("4. feladat: " + lock.getFirtsRepeatKeyId());
+		System.out.println("5. feladat: Egy " + masterKey.length() + " hosszú kódszám: " + lock.getRandomKey(masterKey));
 		writer.printAll(lock.getOpenResults(masterKey));
 	}
 

@@ -1,5 +1,9 @@
 package hu.lock.model.domain;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 public class Key {
 
 	private final int id;
@@ -22,6 +26,16 @@ public class Key {
 		return combination.equals(masterKey);
 	}
 
+	public boolean hasCodeRepeat() {
+		return createKeyMap().values().stream().anyMatch(i -> i > 1);
+	}
+
+	private Map<String, Long> createKeyMap() {
+		return combination.chars()
+				.mapToObj(Integer::toString)
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	}
+	
 	public String openResult(String masterKey) {
 		String result;
 		if (!azonosHossz(masterKey, combination)) {
@@ -49,19 +63,4 @@ public class Key {
 		boolean egyezik = jo.length() == proba.length();
 		return egyezik;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
